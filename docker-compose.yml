@@ -1,0 +1,32 @@
+version: "3"
+services: 
+  master-db:
+    build: 
+      context: ./master
+    volumes:   
+      - ./master_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=''
+      - POSTGRES_DB=test
+      - PG_REP_USER=replicator
+    networks:
+      - test 
+      
+  replica-db:
+    build: 
+      context: ./slave
+    volumes:   
+      - ./slave_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=''
+      - POSTGRES_DB=test
+      - PG_REP_USER=replicator
+    depends_on: 
+      - master-db
+    networks:
+      - test
+      
+networks:
+  test:
