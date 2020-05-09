@@ -4,10 +4,10 @@ services:
     build: 
       context: ./master
     volumes:   
-      - ./master_data:/var/lib/postgresql/data
+      - ./volumes/master_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=test
-      - POSTGRES_PASSWORD=''
+      - POSTGRES_HOST_AUTH_METHOD=trust
       - POSTGRES_DB=test
       - PG_REP_USER=replicator
     networks:
@@ -17,10 +17,10 @@ services:
     build: 
       context: ./slave
     volumes:   
-      - ./slave_data:/var/lib/postgresql/data
+      - ./volumes/slave_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=test
-      - POSTGRES_PASSWORD=''
+      - POSTGRES_HOST_AUTH_METHOD=trust
       - POSTGRES_DB=test
       - PG_REP_USER=replicator
     depends_on: 

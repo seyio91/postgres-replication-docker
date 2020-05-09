@@ -7,9 +7,6 @@ echo "Stopping Master"
 echo "Deleting Network"
 
 echo "deleting master volume"
-sudo rm -rf master_data/
-
-echo "deleting slave volume"
-sudo rm -rf slave_data/
+sudo rm -rf volumes/*
 
 docker-compose rm -f
