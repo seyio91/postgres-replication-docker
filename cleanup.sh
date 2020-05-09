@@ -3,14 +3,15 @@
 echo "Stopping Slave Container"
 docker stop replica-db
 
-echo "Stopping Master"
+echo "Stopping Master Container"
 docker stop master-db
 
-echo "Deleting Network"
+echo "Deleting Test Network"
 docker network rm test
 
-echo "deleting master volume"
-sudo rm -rf volumes/*
+echo "deleting volume"
+docker volume rm master-data
+docker volume rm slave-data
 
 echo "Deleting Docker Images"
 docker rmi replication-slave

@@ -4,12 +4,14 @@ services:
     build: 
       context: ./master
     volumes:   
-      - ./volumes/master_data:/var/lib/postgresql/data
+      - master-volume:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=test
       - POSTGRES_HOST_AUTH_METHOD=trust
       - POSTGRES_DB=test
       - PG_REP_USER=replicator
+    ports:
+      - "15432:5432"
     networks:
       - test 
       
@@ -17,12 +19,14 @@ services:
     build: 
       context: ./slave
     volumes:   
-      - ./volumes/slave_data:/var/lib/postgresql/data
+      - slave-volume:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=test
       - POSTGRES_HOST_AUTH_METHOD=trust
       - POSTGRES_DB=test
       - PG_REP_USER=replicator
+    ports:
+      - "15433:5432"
     depends_on: 
       - master-db
     networks:
@@ -30,3 +34,7 @@ services:
       
 networks:
   test:
+
+volumes:
+  master-data:
+  slave-data:
