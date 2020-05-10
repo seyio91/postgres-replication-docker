@@ -1,5 +1,10 @@
 #!/bin/bash
-
+# ==========================================================
+# install script for running the docker postgres replication scenario
+# postgres containers are started without any password
+# to use a password, delete the environment variable 
+# POSTGRES_HOST_AUTH_METHOD and Replace with POSTGRES_PASSWORD
+# ===========================================================
 echo "Building Master Image"
 docker build -t replication-master -f ./master/Dockerfile ./master
 
