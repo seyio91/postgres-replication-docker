@@ -1,10 +1,10 @@
 #!/bin/bash
 
 echo "Stopping Slave Container"
-docker stop replica-db
+docker stop master-db
 
 echo "Stopping Master Container"
-docker stop master-db
+docker stop replica-db
 
 echo "Deleting Test Network"
 docker network rm test
