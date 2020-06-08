@@ -1,9 +1,9 @@
 #!/bin/bash
 
-echo "Stopping Slave Container"
+echo "Stopping master Container"
 docker stop master-db
 
-echo "Stopping Master Container"
+echo "Stopping slave Container"
 docker stop replica-db
 
 echo "Deleting Test Network"
